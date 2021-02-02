@@ -27,7 +27,7 @@ Le menu principal à gauche (Live, Popular...) détermine le type de recherche q
 - Liste : permet de sélectionner les listes don,t on veut obtenir les tweets
 - Target : recherche spécifique sur les termes donnés dans le fichier `twitter_app/keywords.txt`
 
-Le menu horizontal permet de naviguer entre les différents type de contenus.
+Le menu horizontal permet de naviguer entre les différents types de contenus.
 
 ![alt text](bluealert.png "Title Text")
 
