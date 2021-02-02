@@ -1,0 +1,406 @@
+<html>
+    <head>
+        <title>Blue Alert</title>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='bootstrap.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='new.css') }}">
+        <link rel="icon" href="{{ url_for('static', filename='twitter.svg') }}">
+        
+      </head>
+    <body>
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+      <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='bootstrap.css') }}">
+      <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='new.css') }}">
+
+       <div class="container-fluid mt-4 mb-4">
+          <div class="row">
+          <div class="col-3 ml-5 mt-1"><img src="{{ url_for('static', filename='twitter.svg')}}" height="80%" id="logo"></div>
+          <div class="col-6"><h1 class="text-center" id="title">Blue Alert</h1></div>
+          <div class="col-3"></div>
+          </div>
+        </div>
+        <div class="mr-4 ml-3" >
+
+        <div class="input-group mb-2 mx-auto" style="width:50%">
+            <div class="input-group-prepend" id="overconsole">
+            <div class="input-group-text" id="frontConsole">&nbsp&nbsp>&nbsp&nbsp</div>
+            </div>
+            <input type="text" class="form-control" id="console" spellcheck="false" placeholder="Command">
+        </div>
+        <ul class="nav justify-content-center">
+          <li class="nav-item">
+            <a class="nav-link active" id="v-pills-tweet-tab" aria-current="page" href="#">Tweets</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="v-pills-media-tab" href="#">Medias</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="v-pills-article-tab" href="#">Articles</a>
+          </li>
+        </ul>
+          <div class="row">
+            <div class="col-3" >
+                <div class="row">
+                  <div class="col-7">
+                    <div class="nav flex-column nav-pills" style="width:90%"" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                      <a class="nav-link active" id="v-pills-live-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Live</a>
+                      <a class="nav-link" id="v-pills-popular-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Popular</a>
+                      <a class="nav-link" id="v-pills-list-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">List</a>
+                      <a class="nav-link" id="v-pills-target-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Target</a>
+                    </div>
+                    <br>
+                    <!--
+                    <div class="nav flex-column nav-pills" style="width:90%"" id="v-pills-tab2" role="tablist" aria-orientation="vertical">
+                      <a class="nav-link active" id="v-pills-tweet-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Tweets</a>
+                      <a class="nav-link" id="v-pills-media-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Media</a>
+                      <a class="nav-link" id="v-pills-articles-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Articles</a>
+                      <a class="nav-link" id="v-pills-target-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Video</a>
+                    </div>-->
+                  </div>
+                  <div class="col-5" id="lists"></div>
+              </div>
+              <br>
+              <div class="row" style="word-wrap:break-word">
+                <div class="col-12 ml-3">
+                  <div class="row" id="time"></div>
+                  <div class="row" id="words"></div>
+                  <!--<div id="articles"></div>-->
+                  
+                
+              </div>
+              </div>
+              
+            
+            </div>
+            <div class="card-body col-6" >
+              
+              <div class="card-columns" id="box" style="column-count: 2;"></div>
+              
+             
+
+          </div>
+          <div class="col-3 mt-3" width="100%" >
+            <div class="d-flex justify-content-center">
+            <div class="spinner-grow text-primary" role="status" id="spinner" style="visibility: hidden;">
+              <span class="visually-hidden"></span>
+            </div>
+          </div>
+
+            <div id="links"></div>
+
+          </div>
+        </div>
+      </div>
+  <footer>
+    
+  </footer>
+  <script id="myscript"></script>
+  <script>
+// variables globales
+let state ="live";
+let infos_html="";
+let liste="";
+let tweets_html="";
+let medias_html="";
+let articles_html="";
+let res="";
+// éléments de la page
+let box ;
+let time ;
+let words ;
+let lists ;
+let search ;
+let links ;
+
+// on attend que toute la page soit chargée
+window.addEventListener('load', function(){
+  time=document.getElementById("time");
+  box= document.getElementById("box");
+  words= document.getElementById("words");
+  lists= document.getElementById("lists");
+  links= document.getElementById("links");
+  search=document.getElementById("console");
+// gestion  du type de contenu affiché sur la page centrale
+  document.getElementById("v-pills-media-tab").addEventListener("click",(event)=>{
+    box.innerHTML=medias_html;
+  });
+  document.getElementById("v-pills-tweet-tab").addEventListener("click",(event)=>{
+    box.innerHTML=infos_html;
+  });
+  document.getElementById("v-pills-article-tab").addEventListener("click",(event)=>{
+    box.innerHTML=articles_html;
+  });
+
+// gestion du menu principal
+(document.getElementById('v-pills-live-tab')).addEventListener('click',function(e){
+  state="live";
+  liste="";
+  lists.innerHTML="";
+  });
+(document.getElementById('v-pills-popular-tab')).addEventListener('click',function(e){
+  state="popular";
+  liste="";
+  document.getElementById("lists").innerHTML=""
+  });
+  // pour l'onglet list on affiche le sous-menu
+(document.getElementById('v-pills-list-tab')).addEventListener('click',function(e){
+  state="list"
+  liste="";
+  lists.innerHTML='<div style="width:100%" class="nav flex-column nav-pills"\
+  id="v-pills-tab-2" role="tablist" aria-orientation="vertical">\
+  <a class="nav-link active" id="v-pills-alerteinfo-tab" data-toggle="pill" href="#v-pills-home"\
+   role="tab" aria-controls="v-pills-home" aria-selected="true">Alerte Info</a>\
+   <a class="nav-link" id="v-pills-geopolitique-tab" data-toggle="pill" href="#v-pills-profile" role="tab"\
+    aria-controls="v-pills-profile" aria-selected="false">Géopolitique</a><a class="nav-link"\
+     id="v-pills-osint-tab" data-toggle="pill" href="#v-pills-messages"\
+      role="tab" aria-controls="v-pills-messages" aria-selected="false">OSINT</a>\
+      <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" \
+      role="tab" aria-controls="v-pills-settings" aria-selected="false">Others</a></div>';
+  
+  (document.getElementById('v-pills-alerteinfo-tab')).addEventListener('click',function(e){
+  liste="alerte-info";
+  });
+  (document.getElementById('v-pills-geopolitique-tab')).addEventListener('click',function(e){
+  liste="geopolitique";
+  });
+  (document.getElementById('v-pills-osint-tab')).addEventListener('click',function(e){
+  liste="osint";
+  });
+  // array des listes twitter enregistrées
+  const array_elems = [document.getElementById('v-pills-alerteinfo-tab'),
+  document.getElementById('v-pills-geopolitique-tab'),document.getElementById('v-pills-osint-tab')];
+  
+for (var i=0;i<array_elems.length;i++){
+  let res=" ";
+
+  array_elems[i].addEventListener("click",function(e){
+  job(res,state, liste );
+
+  });
+}
+  });
+  const target = document.getElementById('v-pills-target-tab');
+  target.addEventListener('click',function(e){
+    document.getElementById("lists").innerHTML="";
+    state="target";
+    liste=" ";
+    res=" ";
+    job(res, state, liste);
+
+  });
+
+/*-------------------PART KEY PRESSED---------------*/
+
+search.addEventListener('keypress', function(event){
+  if (event.key === 'Enter') {
+res = event.target.value;
+job(res,state,liste)
+search.value="";
+  }
+})
+//document.getElementById("v-pills-media-tab").addEventListener("click",()=>{
+//  document.getElementById("box").innerHTML=tweets_html;
+//  twttr.widgets.load()
+//});
+});
+
+function make_bag(bagwords){
+  let bag="";
+  for (i in bagwords){
+    bag+=bagwords[i]+"<br>";
+  }
+  bag="<div style='width:60%;' class=\"alert alert-info\" role=\"alert\">\
+  <img class='text-center mb-1'src=\"{{ url_for('static', filename='repo.svg') }}\">"+"<br>"+bag+"</div>";
+  return bag
+}
+
+function make_articles(articles){
+  let articles_html="";
+  for (i in articles){
+    article=articles[i];
+    if (article.type=="ext"){
+        content='<div class="card">\
+          <img class="card-img-top" src="'+article.image+'" style="height:5em;object-fit:cover;">\
+          <div class="card-body">\
+          <b><a id="lien_article" href="'+article.link+'"><p class="card-title" style="font-size:0.9em;">'+article.title+'</b></a>\
+          <p class="card-text" style="font-size:0.8em;">'+article.description+'</p>\
+          </div></div><br style="line-height:5px;">'
+      articles_html+=content
+      }
+  }
+  return articles_html
+}
+
+function make_media(medias){
+  // on remet à 0
+  medias_html="";
+  for (h in medias){
+  media=medias[h];
+  if (media.type=="photo"){
+  console.log(media);
+    medias_html+='<img class="img-thumbnail" src="'+media.url+'"><br>';
+  }
+  else if (media.type=="video"){
+    medias_html+='<div class="card"><video width="350" controls><source src="'+media.url+'"" type="video/mp4"></video></div>'
+      //medias_html+="<blockquote class='twitter-tweet'><a href='"+media.url+"></a></blockquote>";
+      twttr.widgets.load()
+  }
+  console.log(medias_html);
+  }
+  return medias_html
+}
+function make_time(hours){
+  return "<div style='width:60%;' class=\"alert alert-secondary mt-4\" role=\"alert\">\
+  <img src=\"{{ url_for('static', filename='hourglass.svg') }}\">"+"&nbsp&nbsp"+hours+"</div>";
+}
+
+function make_infos(infos){
+  
+  console.log(infos);
+  var final="";
+  var arr=[];
+  var arr1=[];
+  var arr2=[];
+  for (var key in infos){
+    if (key%2==0){
+      arr1.push(key);
+    }
+    else{
+      arr2.push(key);
+  }
+  }
+  arr=arr1.concat(arr2);
+  var key;
+  for (var i=arr.length-1; i>=0;i--){
+    key=arr[i];
+    if (infos[key].indexOf('#') > -1){
+      
+      //const ind = dict[key].indexOf('#');
+      var listt=infos[key].replace(/\n/g," \n" );
+      var list= listt.split(/\s/);
+      var ind=0;
+      for (var elem in list){
+        var monelem=list[elem];
+        if (monelem[ind]==" "){
+          ind+=1;
+        }
+        else{
+          if (monelem[ind]=="#"){
+          list[elem]='<span class="trend">'+list[elem]+'</span>';
+        }
+        else{
+        }}}
+      infos[key]=list.join(' ');
+    }
+  
+  var mon_str=infos[key];
+  if (mon_str.includes('http')){
+      
+      //const ind = dict[key].indexOf('#');
+      var listt=mon_str.replace(/\n/g," \n" );
+      var list= listt.split(/\s/);
+      var ind=0;
+      for (var elem in list){
+        var monelem=list[elem];
+        if (monelem[ind]==" "){
+          ind+=1;
+        }
+        else{
+          if (monelem[ind]=="h" && monelem[ind+1]=="t" && monelem[ind+2]=="t" && monelem[ind+3]=="p" ){
+            list[elem]='<blockquote class="twitter-tweet"><a href="'+list[elem]+'" class="link">'+list[elem]+'</a></blockquote>';
+        }
+        else{
+        }
+      }}
+      infos[key]=list.join(' ');
+    }
+    var final='<div class="card"><div class="card-body">'+infos[key]+'</div></div>'+"<br>"+final;
+  }
+  return final;
+}
+function job(res,state,liste){
+  // clean 
+  medias_html="";
+  tweets_html="";
+  articles_html="";
+  box.innerHTML="";
+  const fin= httpGet("http://localhost:5000/search?data="+res+"&type="+state+"&liste="+liste);
+  
+  const articles = get_articles();
+  parsed=JSON.parse(fin)
+  const hours = make_time(parsed.stats_time);
+  const medias = make_media(parsed.medias);
+  const bagwords = make_bag(parsed.stats_words);
+  const infos = make_infos(parsed.tweetText);
+  // on met à jour les variables globales
+  medias_html=medias;
+  infos_html=infos
+  // on met à jour le html
+  words.innerHTML=bagwords;
+  time.innerHTML=hours;
+  box.innerHTML=infos_html;
+  // on lance la recherche article immédiatement
+  get_articles();
+  
+  
+  
+
+}
+async function get_articles(){
+  document.getElementById("spinner").style.visibility="visible"
+  var httpRequest = new XMLHttpRequest();
+  httpRequest.onreadystatechange = function (){
+    // asynchronous 
+    if (httpRequest.readyState === XMLHttpRequest.DONE) {  
+                    if (httpRequest.status === 200) {  
+    
+    console.log(httpRequest.responseText);
+    const links = document.getElementById("links");
+    let fin = JSON.parse(httpRequest.responseText).links;
+    console.log("look json >>> ",fin)
+    let result=[];
+    let parts;
+    for (i in fin){
+      link=fin[i]
+      if (fin[i].type=="ext"){
+        content='<div class="card" style="width:100%;">\
+          <img class="card-img-top" src="'+link.image+'" style="height:5em;object-fit:cover;">\
+          <div class="card-body">\
+          <b><a id="lien_article" href="'+link.link+'"><p class="card-title" style="font-size:0.9em;">'+link.title+'</b></a>\
+          <p class="card-text" style="font-size:0.8em;">'+link.description+'</p>\
+          </div></div><br style="line-height:5px;">'
+      result=result+content
+      }
+      else if (fin[i].type=="media"){
+        content="<blockquote class='twitter-tweet'><a href='"+fin[i].link+"'></a></blockquote>";
+        tweets_html=tweets_html+content
+        }
+      
+    }
+    // mise à jour 
+    document.getElementById("spinner").style.visibility="hidden"
+    articles_html=make_articles(fin);
+    links.innerHTML=result;
+    }
+    }
+  }
+  httpRequest.open('GET', 'http://localhost:5000/getlinks');  
+  httpRequest.send();  
+
+}
+
+
+
+function httpGet(theUrl)
+{
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
+    xmlHttp.send( null );
+    return xmlHttp.responseText;
+}
+  </script>
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+  </html>

@@ -1,0 +1,45 @@
+.trend{
+    color: #2087f5;
+  }
+
+  .link{
+    color: #2087f5;
+  }
+  .link {
+    position: relative;
+  }
+  
+  .hoverDetail {
+      border: 4px solid #eee;
+      position: absolute;
+      top: 20px;
+      background: white;
+      width: 200px;
+  }
+
+  #time{
+
+  width: 95%;
+  }
+
+  #words{
+width: 95%;
+  }
+
+  #major{
+width: 100%;
+border:5px solid black;
+background-color: black;
+  }
+
+
+#lien_article{
+  color:#1e2327;
+}
+
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
+  color: #fff;
+  /*background-color: #007bff;*/
+  background-color : #0151a7;
+}

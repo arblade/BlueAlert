@@ -1,0 +1,7 @@
+attaque couteau
+attaque policier
+"coup de feu"
+"coups de feu"
+(explosion OR explosions) (entendre OR entend OR entend)
+("des tirs" OR "les tirs") (entendre OR entend OR entend)
+
