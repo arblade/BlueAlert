@@ -8,12 +8,13 @@ Le backend tourne sous flask. Quelques bibliothèques pythons supplémentaires s
 ## Installation.
 
 Vous pouvez extraire le .zip dans un dossier (ex :`BlueAlert`)
+
 Sous linux, pour lancer le serveur flask, executer :
 ```
 export FLASK_APP=BlueAlert
 flask run
 ```
-> remplacer BlueAlert par le nom de votre dossier si celui-ci diffère. Les commande sosnt à executer dans l'espace contenant ce dossier.
+> remplacer BlueAlert par le nom de votre dossier si celui-ci diffère. Les commande sont à executer dans l'espace contenant ce dossier.
 
 
 
