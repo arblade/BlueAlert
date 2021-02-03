@@ -16,6 +16,7 @@ flask run
 ```
 > remplacer BlueAlert par le nom de votre dossier si celui-ci diffère. Les commande sont à executer dans l'espace contenant ce dossier.
 
+Enfin mettre ses 4 clefs twitter (une par ligne) dans un fichier  nommé `keys.txt` dans `twitter_app`.
 
 
 ## Utilisation
