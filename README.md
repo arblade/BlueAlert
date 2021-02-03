@@ -1,5 +1,5 @@
 
-# BlueAlert
+# Blue Alert
 
 ## Prérequis
 
