@@ -17,13 +17,14 @@ pip install -r requirements.txt
 
 Le backend tourne sous flask. Quelques bibliothèques pythons supplémentaires sont aussi nécessaires.
 
-## Installation.
-
-Dans un premier temps, il faut installer deux add-ons de nltk :
+Enfin, il faut installer deux add-ons de nltk :
 
 ```
 python3.x setup.py
 ```
+
+## Installation.
+
 
 Vous pouvez extraire le .zip dans un dossier (ex :`BlueAlert`)
 
