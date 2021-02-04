@@ -7,6 +7,7 @@
 - [ ] Intégrer un onglet plus convivial de tweets avec les images, les vidéos, voir les articles.
 - [ ] Intégrer à l'onglet tweet le status des tweets (provenant d'un compte vérifié, provenant d'un compte avec 1k+, 5k+, 10k+ de followers, tweet récent, tweet animé (prévoir une fonction f(likes, retweets) = score).
 - [ ] Coder en backend une fonction pour retrouver le / les comptes à l'origine d'une tendance.
+- [ ] Coder une fonction de reconnaissance de tendance en fonction de la période de publication du premier au dernier tweet.
 
 ## Prérequis
 
@@ -40,6 +41,8 @@ Le menu principal à gauche (Live, Popular...) détermine le type de recherche q
 - Target : recherche spécifique sur les termes donnés dans le fichier `twitter_app/keywords.txt`
 
 Le menu horizontal permet de naviguer entre les différents types de contenus.
+
+A gauche on peut voir deux encarts : le sablier représente la durée écoulée entre le premier et le dernier tweet affichés. Le livre représente la liste des mots clefs utilisés (bag of words).
 
 ![alt text](bluealert.png "Title Text")
 
