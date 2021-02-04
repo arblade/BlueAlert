@@ -52,6 +52,5 @@ def get_links(stringpd):
                 target.append(rapport)
 
         #,lambda x : requests.get(x.group()).url,
-    print("[+] result final ",target)
     
     return json.dumps({"links" : target})
