@@ -4,6 +4,7 @@
 ## Prérequis
 
 ```pip install -r requirements.txt```
+
 Le backend tourne sous flask. Quelques bibliothèques pythons supplémentaires sont aussi nécessaires.
 
 ## Installation.
