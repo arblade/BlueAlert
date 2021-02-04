@@ -3,7 +3,9 @@
 
 ## Futures améliorations
 
-- [ ] Intégrer à l'onglet tweet le status des tweets (provenant d'un compte vérifié, provenant d'un compte avec 1k+, 5k+, 10k+ de followers, tweet récent, tweet animé (prévoir une fonction f(likes, retweets) = score).
+- [x] Intégrer à l'onglet tweet le status des tweets (provenant d'un compte vérifié, provenant d'un compte avec 1k+, 5k+, 10k+ de followers, tweet récent, tweet animé 
+- [ ] modifier la police des tweets pour un meilleur affichage
+- [ ] Prévoir une fonction f(likes, retweets) = score).
 - [ ] Proposer un système de base de données permettant de configurer ses listes graphiquements ainsi que ses targets
 - [ ] Intégrer un onglet plus convivial de tweets avec les images, les vidéos, voir les articles.
 - [ ] Coder en backend une fonction pour retrouver le / les comptes à l'origine d'une tendance.
