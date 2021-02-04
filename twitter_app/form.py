@@ -4,7 +4,8 @@ import time
 import requests
 import nltk
 import heapq
-from nltk.corpus import stopwords  
+from nltk.corpus import stopwords
+import datetime
 def get_pd(tweets):
     list_media=[]
     DetailsSet=pd.DataFrame()
@@ -36,21 +37,28 @@ def get_pd(tweets):
                 list_media+=[{"type":type_media, "url":url}]
     DetailsSet['tweetID'] = [tweet.id for tweet in tweets]
     DataSet['tweetTime'] = [tweet.created_at for tweet in tweets]
-    mmin=DataSet['tweetTime'][0].to_pydatetime()
-    mmax=DataSet['tweetTime'][0].to_pydatetime()
-    for date in DataSet['tweetTime']:
-        if date.to_pydatetime()>mmax:
-            mmax=date.to_pydatetime()
-        if date.to_pydatetime()<mmin:
-            mmin=date.to_pydatetime()
-    res=mmax-mmin
-    hours=res.total_seconds()/3600.00
+    
+    if len(DataSet['tweetTime'])!=0:
+        now=datetime.datetime.now()-datetime.timedelta(hours=1)
+        mmin=DataSet['tweetTime'][0]
+        mmax=DataSet['tweetTime'][0]
+        for k in range(len(DataSet['tweetTime'])):
+            date=DataSet['tweetTime'][k]
+            if date.to_pydatetime()>mmax:
+                mmax=date
+            if date.to_pydatetime()<mmin:
+                mmin=date
+            DataSet['tweetTime'][k]=str(now - DataSet['tweetTime'][k].to_pydatetime())[:-7]
+        res=mmax-mmin
+        hours=res.total_seconds()/3600.00
+    else :
+        print("[+] Aucun tweet")
+        res="0"
     stats_time=res
     
 
         #ts.append(time.strftime('%Y-%m-%d %H:%M:%S', time.strptime(date,'%a %b %d %H:%M:%S +0000 %Y')))
-    print("heure >>>> ", mmax-mmin)
-    print("heures au total ", hours)
+
     l=[]
     for tweet in tweets :
         if hasattr(tweet, 'retweeted_status'):
@@ -103,8 +111,7 @@ def get_pd(tweets):
     # DataSet['userCreateDt'] = [tweet.user.created_at for tweet 
     # in tweets]
     # DataSet['userDesc'] = [tweet.user.description for tweet in tweets]
-    # DataSet['userFollowerCt'] = [tweet.user.followers_count for tweet 
-    # in tweets]
+    DataSet['userFollowerCt'] = [tweet.user.followers_count for tweet in tweets]
     # DataSet['userFriendsCt'] = [tweet.user.friends_count for tweet 
     # in tweets]
     # DataSet['userLocation'] = [tweet.user.location for tweet in tweets]
