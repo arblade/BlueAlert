@@ -10,6 +10,7 @@
 - [ ] Intégrer un onglet plus convivial de tweets avec les images, les vidéos, voir les articles.
 - [ ] Coder en backend une fonction pour retrouver le / les comptes à l'origine d'une tendance.
 - [ ] Coder une fonction de reconnaissance de tendance (score [crisis, high, medium, low]) en fonction de la période de publication du premier au dernier tweet.
+- [ ] Régler le popular qui ne retourne pas assez de résultats
 
 ## Prérequis
 
