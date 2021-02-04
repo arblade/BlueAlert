@@ -13,7 +13,7 @@
 
        <div class="container-fluid mt-4 mb-4">
           <div class="row">
-          <div class="col-3 ml-5 mt-1"><img src="{{ url_for('static', filename='twitter.svg')}}" height="80%" id="logo"></div>
+          <div class="col-3 ml-5 mt-1"><img class="img-fluid" src="{{ url_for('static', filename='twitter.svg')}}" style='width:13%;' id="logo"></div>
           <div class="col-6"><h1 class="text-center" id="title">Blue Alert</h1></div>
           <div class="col-3"></div>
           </div>
@@ -220,6 +220,7 @@ function make_articles(articles){
     if (article.type=="ext"){
         content='<div class="card">\
           <img class="card-img-top" src="'+article.image+'" style="height:5em;object-fit:cover;">\
+          <div class="card-header">Header</div>\
           <div class="card-body">\
           <b><a id="lien_article" href="'+article.link+'"><p class="card-title" style="font-size:0.9em;">'+article.title+'</b></a>\
           <p class="card-text" style="font-size:0.8em;">'+article.description+'</p>\
