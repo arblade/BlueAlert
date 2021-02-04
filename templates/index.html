@@ -220,7 +220,6 @@ function make_articles(articles){
     if (article.type=="ext"){
         content='<div class="card">\
           <img class="card-img-top" src="'+article.image+'" style="height:5em;object-fit:cover;">\
-          <div class="card-header">Header</div>\
           <div class="card-body">\
           <b><a id="lien_article" href="'+article.link+'"><p class="card-title" style="font-size:0.9em;">'+article.title+'</b></a>\
           <p class="card-text" style="font-size:0.8em;">'+article.description+'</p>\
@@ -237,7 +236,7 @@ function make_media(medias){
   for (h in medias){
   media=medias[h];
   if (media.type=="photo"){
-  console.log(media);
+  //console.log(media);
     medias_html+='<img class="img-thumbnail" src="'+media.url+'"><br>';
   }
   else if (media.type=="video"){
@@ -245,7 +244,7 @@ function make_media(medias){
       //medias_html+="<blockquote class='twitter-tweet'><a href='"+media.url+"></a></blockquote>";
       twttr.widgets.load()
   }
-  console.log(medias_html);
+  //console.log(medias_html);
   }
   return medias_html
 }
@@ -254,9 +253,9 @@ function make_time(hours){
   <img src=\"{{ url_for('static', filename='hourglass.svg') }}\">"+"&nbsp&nbsp"+hours+"</div>";
 }
 
-function make_infos(infos){
+function make_infos(infos, time, followers_count){
   
-  console.log(infos);
+  //console.log(infos);
   var final="";
   var arr=[];
   var arr1=[];
@@ -271,8 +270,10 @@ function make_infos(infos){
   }
   arr=arr1.concat(arr2);
   var key;
-  for (var i=arr.length-1; i>=0;i--){
+  //console.log("[+] Info arr : ", arr);
+  for (var i=0; i<arr.length;i++){
     key=arr[i];
+    
     if (infos[key].indexOf('#') > -1){
       
       //const ind = dict[key].indexOf('#');
@@ -314,7 +315,17 @@ function make_infos(infos){
       }}
       infos[key]=list.join(' ');
     }
-    var final='<div class="card"><div class="card-body">'+infos[key]+'</div></div>'+"<br>"+final;
+    if (parseInt(followers_count[key])<1000){
+      img_html='<img src={{ url_for("static", filename="heart.svg")}}>'
+    }
+    else if (parseInt(followers_count[key])<5000){
+      img_html='<img src={{ url_for("static", filename="heart-half.svg")}}>'
+    }
+    else{
+      img_html='<img src={{ url_for("static", filename="heart-fill.svg")}}>'
+    }
+    var final=final+'<div class="card"><div class="card-header">'+img_html+'&nbsp&nbsp'+time[key]+'</div><div class="card-body">'+infos[key]+'</div></div><br>';
+  
   }
   return final;
 }
@@ -331,7 +342,7 @@ function job(res,state,liste){
   const hours = make_time(parsed.stats_time);
   const medias = make_media(parsed.medias);
   const bagwords = make_bag(parsed.stats_words);
-  const infos = make_infos(parsed.tweetText);
+  const infos = make_infos(parsed.tweetText, parsed.tweetTime, parsed.userFollowerCt);
   // on met à jour les variables globales
   medias_html=medias;
   infos_html=infos
@@ -354,10 +365,10 @@ async function get_articles(){
     if (httpRequest.readyState === XMLHttpRequest.DONE) {  
                     if (httpRequest.status === 200) {  
     
-    console.log(httpRequest.responseText);
+    //console.log(httpRequest.responseText);
     const links = document.getElementById("links");
     let fin = JSON.parse(httpRequest.responseText).links;
-    console.log("look json >>> ",fin)
+    //console.log("look json >>> ",fin)
     let result=[];
     let parts;
     for (i in fin){
