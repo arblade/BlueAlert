@@ -19,6 +19,12 @@ Le backend tourne sous flask. Quelques bibliothèques pythons supplémentaires s
 
 ## Installation.
 
+Dans un premier temps, il faut installer deux add-ons de nltk :
+
+```
+python3.x setup.py
+```
+
 Vous pouvez extraire le .zip dans un dossier (ex :`BlueAlert`)
 
 Puis mettre ses 4 clefs twitter (une par ligne) dans un fichier  nommé `keys.txt` dans le dossier `twitter_app`.
