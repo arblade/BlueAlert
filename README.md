@@ -18,7 +18,7 @@ Sous linux, pour lancer le serveur flask, executer :
 export FLASK_APP=BlueAlert
 flask run
 ```
-> remplacer BlueAlert par le nom de votre dossier si celui-ci diffère. Les commande sont à executer dans l'espace contenant ce dossier.
+> remplacer BlueAlert par le nom de votre dossier si celui-ci diffère. Les commande sont à executer dans l'espace de ce dossier.
 
 Enfin mettre ses 4 clefs twitter (une par ligne) dans un fichier  nommé `keys.txt` dans `twitter_app`.
 
