@@ -51,7 +51,7 @@ Le menu horizontal permet de naviguer entre les différents types de contenus.
 
 A gauche on peut voir deux encarts : le sablier représente la durée écoulée entre le premier et le dernier tweet affichés et le livre représente la liste des mots clefs utilisés (bag of words).
 
-![alt text](bluealert.png "Title Text")
+![alt text](bluealert.PNG "Title Text")
 
 
 
