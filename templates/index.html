@@ -253,7 +253,7 @@ function make_time(hours){
   <img src=\"{{ url_for('static', filename='hourglass.svg') }}\">"+"&nbsp&nbsp"+hours+"</div>";
 }
 
-function make_infos(infos, time, followers_count){
+function make_infos(infos, time, followers_count,authorVerified){
   
   //console.log(infos);
   var final="";
@@ -315,7 +315,10 @@ function make_infos(infos, time, followers_count){
       }}
       infos[key]=list.join(' ');
     }
-    if (parseInt(followers_count[key])<1000){
+    if (authorVerified[key]==true){
+      img_html='<img src={{ url_for("static", filename="heart-verified.svg")}}>'
+    }
+    else if (parseInt(followers_count[key])<1000){
       img_html='<img src={{ url_for("static", filename="heart.svg")}}>'
     }
     else if (parseInt(followers_count[key])<5000){
@@ -324,25 +327,26 @@ function make_infos(infos, time, followers_count){
     else{
       img_html='<img src={{ url_for("static", filename="heart-fill.svg")}}>'
     }
-    var final=final+'<div class="card"><div class="card-header">'+img_html+'&nbsp&nbsp'+time[key]+'</div><div class="card-body">'+infos[key]+'</div></div><br>';
+    var final=final+'<div class="card"><div class="card-body">'+infos[key]+'</div><div class="card-footer">'+img_html+'&nbsp&nbsp'+time[key]+'</div></div><br>';
   
   }
   return final;
 }
 function job(res,state,liste){
-  // clean 
+  // clean
+  links.innerHTML="";
   medias_html="";
   tweets_html="";
   articles_html="";
   box.innerHTML="";
   const fin= httpGet("http://localhost:5000/search?data="+res+"&type="+state+"&liste="+liste);
   
-  const articles = get_articles();
+  //const articles = get_articles();
   parsed=JSON.parse(fin)
   const hours = make_time(parsed.stats_time);
   const medias = make_media(parsed.medias);
   const bagwords = make_bag(parsed.stats_words);
-  const infos = make_infos(parsed.tweetText, parsed.tweetTime, parsed.userFollowerCt);
+  const infos = make_infos(parsed.tweetText, parsed.tweetTime, parsed.userFollowerCt,parsed.authorVerified);
   // on met à jour les variables globales
   medias_html=medias;
   infos_html=infos
