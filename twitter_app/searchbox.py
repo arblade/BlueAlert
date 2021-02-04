@@ -1,8 +1,8 @@
 def searchbox(file):
     res=""
     import pathlib
-    res=str(pathlib.Path(__file__).parent.absolute())
-    file_abs=res+"/"+file
+    path=str(pathlib.Path(__file__).parent.absolute())
+    file_abs=path+"/"+file
     with open(file_abs,'r') as f:
         for elem in f.readlines():
             elem=elem.replace('\n',"")
@@ -12,6 +12,7 @@ def searchbox(file):
                 res+=elem
             else :
                 res+=" OR " + "("+elem+")"
+    print("[+] résultat searchbox : ", str(res))
     return str(res)
 
 
