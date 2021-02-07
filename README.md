@@ -1,7 +1,7 @@
 
 # Blue Alert
 
-## Pour les détails théoriques de la détection de crise et des signaux faibles, voir le [wiki](https://github.com/Arblade/BlueAlert/wiki).
+Pour les détails théoriques de la détection de crise et des signaux faibles, voir le [wiki](https://github.com/Arblade/BlueAlert/wiki).
 
 ## Futures améliorations
 
