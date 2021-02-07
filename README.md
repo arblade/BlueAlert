@@ -1,6 +1,8 @@
 
 # Blue Alert
 
+## Pour les détails théoriques de la détection de crise et des signaux faibles, voir le [wiki](https://github.com/Arblade/BlueAlert/wiki).
+
 ## Futures améliorations
 
 - [x] Intégrer à l'onglet tweet le status des tweets (provenant d'un compte vérifié, provenant d'un compte avec 1k+, 5k+, 10k+ de followers, tweet récent, tweet animé 
