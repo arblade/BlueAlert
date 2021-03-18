@@ -3,15 +3,16 @@
 
 Pour les détails théoriques de la détection de crise et des signaux faibles, voir le [wiki](https://github.com/Arblade/BlueAlert/wiki).
 
+![alt text](bluealert.PNG "Title Text")
+
 ## Futures améliorations
 
 - [x] Intégrer à l'onglet tweet le status des tweets (provenant d'un compte vérifié, provenant d'un compte avec 1k+, 5k+, 10k+ de followers, tweet récent, tweet animé 
-- [ ] modifier la police des tweets pour un meilleur affichage
+- [x] Coder une fonction de reconnaissance de tendance (score [crisis, high, medium, low]) en fonction de la période de publication du premier au dernier tweet.
 - [ ] Prévoir une fonction f(likes, retweets) = score).
 - [ ] Proposer un système de base de données permettant de configurer ses listes graphiquements ainsi que ses targets
 - [ ] Intégrer un onglet plus convivial de tweets avec les images, les vidéos, voir les articles.
 - [ ] Coder en backend une fonction pour retrouver le / les comptes à l'origine d'une tendance.
-- [ ] Coder une fonction de reconnaissance de tendance (score [crisis, high, medium, low]) en fonction de la période de publication du premier au dernier tweet.
 - [ ] Régler le popular qui ne retourne pas assez de résultats
 
 ## Prérequis
@@ -56,7 +57,6 @@ Le menu horizontal permet de naviguer entre les différents types de contenus.
 
 A gauche on peut voir deux encarts : le sablier représente la durée écoulée entre le premier et le dernier tweet affichés et le livre représente la liste des mots clefs utilisés (bag of words).
 
-![alt text](bluealert.PNG "Title Text")
 
 
 
